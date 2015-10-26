@@ -1,0 +1,14 @@
+/vendor
+/node_modules
+/bootstrap
+/doc
+/storage
+/test 
+Homestead.yaml
+Homestead.json
+.env
+.idea
+todo/task1.php
+*.txt
+*.xml
+*.xml
