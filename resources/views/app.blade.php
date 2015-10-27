@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
 
 <head>
-<title>Widgets</title>
+<title>Fashion Sponge | Admin</title>
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,6 +27,11 @@
   <!-- Plugin CSS -->
   <link rel="stylesheet" href="{{asset('public/bower_components/magnific-popup/dist/magnific-popup.css')}}">
 
+
+    {{-- custom css--}}
+    <link rel="stylesheet" href="{{asset('public/css/style.css')}}" />
+
+
   <!-- <link rel="stylesheet" href="./css/custom.css"> -->
   <!-- Favicon -->
   <link rel="shortcut icon" href="favicon.ico">
@@ -36,19 +41,13 @@
   <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
-
-
-
-
-
-
    {{--Source path images--}}
-   {{ Session::put('imgSrc', 'http://localhost/fs/new_fs/alphatest/fs_folders/images/uploads/brands')}}
 
-
-
-
-
+   @if(App::environment() == 'local')
+       {{ Session::put('imgSrc', 'http://localhost/fs/new_fs/alphatest/fs_folders/images/uploads/brands')}}
+   @else
+       {{ Session::put('imgSrc', 'http://dev.fashionsponge.com/fs_folders/images/uploads/brands/')}}
+   @endif
 
 
 </head>

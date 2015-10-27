@@ -18,4 +18,11 @@ class Brand extends Model
      */
     protected $primaryKey = 'bno';
 
+    /**
+     * @param $category
+     */
+    public static function getLastUploadBnoByBCNO($bcno) {
+        $brand =  Brand::where('bcno', $bcno)->orderBy('bno', 'desc')->take(1)->get()->toArray();
+        return ( !empty($brand[0]['bno']) ) ? $brand[0]['bno'] : 744;
+    }
 }

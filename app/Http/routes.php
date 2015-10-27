@@ -39,12 +39,16 @@ Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 // Home
-Route::get('home', 'HomeController@index');
+Route::get('home', [
+    'as' => 'route_dashboard_home', 'uses' => 'DashboardController@index'
+]);
 
 // Dashboard
 Route::get('dashboard', [
     'as' => 'route_dashboard', 'uses' => 'DashboardController@index'
 ]);
+
+
 
 // Manage
 Route::get('manage', [
@@ -118,9 +122,7 @@ Route::get('api/android/search/{stat?}', [
     'as' => 'route_api_android_search', 'uses' => 'ApiAndroidController@search'
 ]);
 
-
-
-Route::get('brand', [
+Route::get('brand/{category?}/{gender?}', [
     'as' => 'route_brand', 'uses' => 'BrandController@index'
 ]);
 
