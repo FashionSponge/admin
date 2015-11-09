@@ -51,43 +51,45 @@ Route::get('dashboard', [
 
 
 // Manage
-Route::get('manage', [
-    'as' => 'route_manage', 'uses' => 'ManageController@index'
-]);
+//Route::get('manage', [
+//    'as' => 'route_manage', 'uses' => 'ManageController@index'
+//]);
 
 // Billing, Payment
-Route::get('billing', [
-    'as' => 'route_belling', 'uses' => 'BillingController@index'
-]);
-Route::get('payment', [
-    'as' => 'route_payment', 'uses' => 'PaymentController@index'
-]);
+//Route::get('billing', [
+//    'as' => 'route_belling', 'uses' => 'BillingController@index'
+//]);
+
+//Route::get('payment', [
+//    'as' => 'route_payment', 'uses' => 'PaymentController@index'
+//]);
 
 // Settings, Account
-Route::get('settings', [
-    'as' => 'route_settings', 'uses' => 'SettingsController@index'
-]);
-Route::get('account', [
-    'as' => 'route_account', 'uses' => 'AccountController@index'
-]);
+//Route::get('settings', [
+//    'as' => 'route_settings', 'uses' => 'SettingsController@index'
+//]);
+
+//Route::get('account', [
+//    'as' => 'route_account', 'uses' => 'AccountController@index'
+//]);
 
 // Help, Documentation
-Route::get('help', [
-    'as' => 'route_help', 'uses' => 'HelpController@index'
-]);
-Route::get('documentation', [
-    'as' => 'route_documentation', 'uses' => 'DocumentationController@index'
-]);
+//Route::get('help', [
+//    'as' => 'route_help', 'uses' => 'HelpController@index'
+//]);
+//Route::get('documentation', [
+//    'as' => 'route_documentation', 'uses' => 'DocumentationController@index'
+//]);
 
 // Slot
-Route::get('ad-slot', [
-    'as' => 'route_ad_slot', 'uses' => 'SlotController@index'
-]);
+//Route::get('ad-slot', [
+//    'as' => 'route_ad_slot', 'uses' => 'SlotController@index'
+//]);
 
 // User change password
-Route::POST('changePass', [
-    'as' => 'route_postChangePass', 'uses' => 'UserController@postChangePass'
-]);
+//Route::POST('changePass', [
+//    'as' => 'route_postChangePass', 'uses' => 'UserController@postChangePass'
+//]);
 
 // Ad reports and status
 Route::get('ad/stat/query/{stat?}', [
@@ -115,16 +117,31 @@ Route::get('ad/header-status/query/{stat?}', [
 ]);
 
 // API iTunes and Android
-Route::get('api/iTune/search/{stat?}', [
-    'as' => 'route_api_iTune_search', 'uses' => 'ApiITuneController@search'
-]);
-Route::get('api/android/search/{stat?}', [
-    'as' => 'route_api_android_search', 'uses' => 'ApiAndroidController@search'
-]);
+//Route::get('api/iTune/search/{stat?}', [
+//    'as' => 'route_api_iTune_search', 'uses' => 'ApiITuneController@search'
+//]);
+//Route::get('api/android/search/{stat?}', [
+//    'as' => 'route_api_android_search', 'uses' => 'ApiAndroidController@search'
+//]);
 
 Route::get('brand/{category?}/{gender?}', [
     'as' => 'route_brand', 'uses' => 'BrandController@index'
 ]);
+
+
+
+
+Route::get('insert', [
+    'as' => 'profile', 'uses' => 'TestingController@insert'
+]);
+
+Route::get('tag/',[
+    'as'=>'', 'uses' =>'TagController@index'
+]);
+
+Route::controller('tag', 'TagController');
+
+
 
 
 

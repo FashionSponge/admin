@@ -204,7 +204,6 @@
         <ul class="nav navbar-nav navbar-right">
 
           <li>
-            <a href="{{Route('route_account')}}">My Account</a>
           </li>
 
           <li class="dropdown navbar-profile">
@@ -216,7 +215,7 @@
 
             <ul class="dropdown-menu" role="menu">
               <li>
-                <a href="{{Route('route_settings')}}">
+                <a href="">
                   <i class="fa fa-cogs"></i>
                   &nbsp;&nbsp;Settings
                 </a>
