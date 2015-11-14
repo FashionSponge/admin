@@ -15,7 +15,7 @@ class TagController extends Controller
         return view('pages.tag.home');
     }
 
-    public function getColor($test)
+    public function color($test)
     {
         return 'test' . $test;
     }

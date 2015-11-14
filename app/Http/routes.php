@@ -128,20 +128,34 @@ Route::get('brand/{category?}/{gender?}', [
     'as' => 'route_brand', 'uses' => 'BrandController@index'
 ]);
 
-
-
-
 Route::get('insert', [
     'as' => 'profile', 'uses' => 'TestingController@insert'
 ]);
 
-Route::get('tag/',[
-    'as'=>'', 'uses' =>'TagController@index'
+
+//TAG
+$tagPages = array('material', 'pattern', 'garment', 'url', 'style', 'occasion', 'season', 'price');
+$slash    = '\ ';
+
+
+Route::get('tag/garment/{sub_category?}/{name?}/{plus_size?}', [
+    'as' => 'tag.garment.show', 'uses' => 'Tag\GarmentController@show'
 ]);
 
-Route::controller('tag', 'TagController');
 
+foreach($tagPages as $key => $page):
+    Route::get('tag/' . $page . '/{name?}/{plus_size?}', [
+        'as' => 'tag.' . $page . '.index', 'uses' => 'Tag' . str_replace(' ', '', $slash) . ucfirst($page) . 'Controller@index'
+    ]);
 
+    Route::resource("tag/$page", 'Tag'. str_replace(' ', '', $slash) . ucfirst($page) . 'Controller',
+        ['only' => ['store', 'update', 'show']]);
+endforeach;
 
+Route::resource('tag/garment-category', 'Tag\GarmentCategoryController', [
+    'only'=>['index', 'store', 'update']
+]);
 
-
+Route::resource('tag/garment-sub-category', 'Tag\GarmentSubCategoryController', [
+    'only'=>['index', 'store', 'update', 'show']
+]);

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\TagOccasion;
+use App\TagSeason;
+use App\TagStyle;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -22,6 +25,11 @@ class TestingController extends Controller
         $this->insertPattern();
         $this->insertMaterial();
         $this->insertGarment();
+        $this->insertUrl();
+        $this->insertStyle();
+        $this->insertSeason();
+        $this->insertOccasion();
+        $this->insertPrice();
     }
 
     private function insertColor() {
@@ -94,4 +102,55 @@ class TestingController extends Controller
             }
         }
     }
+    private function insertUrl() {
+        foreach(TagUrl::url() as $key => $item) {
+            if(!TagUrl::firstOrCreate(['name'=>$item])) {
+                echo "url added name =>$item <br> ";
+            }
+            else {
+                echo "url exist name =>$item <br> ";
+            }
+        }
+    }
+    private function insertStyle(){
+        foreach(TagStyle::style() as $key => $item) {
+            if(!TagStyle::firstOrCreate(['name'=>$item])) {
+                echo "style added name =>$item <br> ";
+            }
+            else {
+                echo "style exist name =>$item <br> ";
+            }
+        }
+    }
+    private function insertSeason(){
+        foreach(TagSeason::season() as $key => $item) {
+            if(!TagSeason::firstOrCreate(['name'=>$item])) {
+                echo "season added name =>$item <br> ";
+            }
+            else {
+                echo "season exist name =>$item <br> ";
+            }
+        }
+    }
+    private function insertOccasion(){
+        foreach(TagOccasion::occasion() as $key => $item) {
+            if(!TagOccasion::firstOrCreate(['name'=>$item])) {
+                echo "occasion added name =>$item <br> ";
+            }
+            else {
+                echo "occasion exist name =>$item <br> ";
+            }
+        }
+    }
+    private function insertPrice(){
+        foreach(TagPrice::price() as $key => $item) {
+            if(!TagPrice::firstOrCreate(['name'=>$item])) {
+                echo "occasion added name =>$item <br> ";
+            }
+            else {
+                echo "occasion exist name =>$item <br> ";
+            }
+        }
+    }
+
 }

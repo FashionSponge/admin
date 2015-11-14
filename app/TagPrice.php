@@ -12,4 +12,22 @@ class TagPrice extends Model
      * @var string
      */
     protected $table = 'fs_tag_price';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name'];
+
+
+    public static function price() {
+        return array(
+            '$100',
+            '$200',
+            '$300',
+            '$400',
+            '$500'
+        );
+    }
 }

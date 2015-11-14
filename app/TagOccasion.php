@@ -4,15 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TagGarmentCategory extends Model
+class TagOccasion extends Model
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'fs_tag_garment_category';
-
+    protected $table = 'fs_tag_occasion';
 
     /**
      * The attributes that are mass assignable.
@@ -22,12 +21,11 @@ class TagGarmentCategory extends Model
     protected $fillable = ['name'];
 
 
-    /**
-     * Get the comments for the blog post.
-     */
-    public function tagGarmentSubCategory()
-    {
-        return $this->hasMany('App\TagGarmentSubCategory', 'garment_category_id', 'id');
+    public static function occasion() {
+        return array(
+            'Conference',
+            'College',
+            'Cocktail'
+        );
     }
-
 }

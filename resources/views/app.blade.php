@@ -12,7 +12,13 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <meta name="csrf-token" content="{{ csrf_token() }}" />
-
+    <script type=text/javascript>
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+        });
+     </script>
   <!-- Google Font: Open Sans -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,800,800italic">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:400,300,700">
@@ -32,6 +38,16 @@
     <link rel="stylesheet" href="{{asset('public/css/style.css')}}" />
 
 
+ <!-- Plugin CSS -->
+    <link rel="stylesheet" href="{{asset('public/bower_components/select2/dist/css/select2.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('public/bower_components/select2-bootstrap-theme/dist/select2-bootstrap.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('public/bower_components/jquery-icheck/skins/minimal/_all.css')}}" />
+    <link rel="stylesheet" href="{{asset('public/bower_components/bootstrap-3-timepicker/css/bootstrap-timepicker.css')}}" />
+    <link rel="stylesheet" href="{{asset('public/bower_components/bootstrap-datepicker/css/datepicker3.css')}}" />
+    <link rel="stylesheet" href="{{asset('public/bower_components/bootstrap-jasny/dist/css/jasny-bootstrap.css')}}" />
+
+
+
   <!-- <link rel="stylesheet" href="./css/custom.css"> -->
   <!-- Favicon -->
   <link rel="shortcut icon" href="favicon.ico">
@@ -45,9 +61,29 @@
 
    @if(App::environment() == 'local')
        {{ Session::put('imgSrc', 'http://localhost/fs/new_fs/alphatest/fs_folders/images/uploads/brands')}}
+
+       {{--put--}}
+       {{Session::put('imgSrcUploadsRead' . ucfirst($folder), str_replace('admin', '', base_path() . 'new_fs/alphatest/fs_folders/images/uploads') )}}
+
+       {{--Read--}}
+       {{Session::put('imgSrcUploads' , 'http://localhost/fs/new_fs/alphatest/fs_folders/images/uploads')}}
    @else
        {{ Session::put('imgSrc', 'http://dev.fashionsponge.com/fs_folders/images/uploads/brands/')}}
+
+       {{--put--}}
+       {{Session::put('imgSrcUploadsRead' . ucfirst($folder), str_replace('admin', '', base_path() . 'dev/fs_folders/images/uploads') )}}
+
+       {{--Read--}}
+       {{Session::put('imgSrcUploads' , 'http://dev.fashionsponge.com/fs_folders/images/uploads')}}
    @endif
+
+   {{--{{'session get 1  = ' . Session::get('imgSrcUploadsRead')}} <br>--}}
+   {{--{{'session get 2  = ' . Session::get('imgSrcUploads')}} <br>--}}
+
+
+
+
+
 
 
 </head>
@@ -259,19 +295,31 @@
           <button class="btn btn-sm mainnav-form-btn"><i class="fa fa-search"></i></button>
         </form>
 
-        <ul class="mainnav-menu">
 
-          <li class="dropdown ">
-                <a href="{{Route('route_dashboard')}}" class="dropdown-toggle">
-                    Dashboard
-                </a>
-          </li>
-          <li class="dropdown ">
-            <a href="{{Route('route_brand')}}" class="dropdown-toggle"  >
-                Brand
-            </a>
-          </li>
-        </ul>
+        <br>
+
+      <ul class="nav nav-pills">
+        <li role="presentation" class="active"><a  href="{{Route('route_dashboard')}}" >Dashboard</a></li>
+        <li role="presentation"><a  href="{{Route('route_brand')}}">Brand</a></li>
+        <li role="presentation" class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            Tag <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+
+            <li><a href="{{Route('tag.material.index') . '/all/all'}}">Material</a></li>
+            <li><a href="{{Route('tag.pattern.index') . '/all/all'}}">Pattern</a></li>
+            <li><a href="{{Route('tag.garment-category.index')}}">Garment</a></li>
+            <li><a href="{{Route('tag.url.index')}}">URL</a></li>
+            <li><a href="{{Route('tag.price.index')}}">Price</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="{{Route('tag.style.index') . '/all/all'}}">Style</a></li>
+            <li><a href="{{Route('tag.occasion.index') . '/all/all'}}">Occasion</a></li>
+            <li><a href="{{Route('tag.season.index') . '/all/all'}}">Season</a></li>
+
+          </ul>
+        </li>
+      </ul>
 
       </nav>
 
@@ -354,6 +402,10 @@
                   </li>
                 </ul>
               </li>
+
+
+
+
               <li class="dropdown ">
                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
                 Components
@@ -568,6 +620,7 @@
 </footer>
 <!-- Bootstrap core JavaScript
 ================================================== -->
+
     <!-- Core JS -->
     <script src="{{asset('public/bower_components/jquery/dist/jquery.js')}}"></script>
     <script src="{{asset('public/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
@@ -619,11 +672,29 @@
     <script src="{{asset('public/global/js/demos/flot/pie.js')}}"></script>
     <script src="{{asset('public/global/js/demos/flot/auto.js')}}"></script>
 
+        <!-- Plugin JS -->
+     <script src="{{asset('public/bower_components/select2/dist/js/select2.min.js')}}"></script>
+     <script src="{{asset('public/bower_components/jquery-icheck/icheck.min.js')}}"></script>
+     <script src="{{asset('public/bower_components/parsleyjs/dist/parsley.js')}}"></script>
+     <script src="{{asset('public/bower_components/bootstrap-3-timepicker/js/bootstrap-timepicker.js')}}"></script>
+     <script src="{{asset('public/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js')}}"></script>
+     <script src="{{asset('public/bower_components/bootstrap-jasny/js/fileinput.js')}}"></script>
+
+    <!-- App JS -->
+     <script src="{{asset('public/global/js/mvpready-helpers.js')}}"></script>
+     <script src="{{asset('public/global/js/mvpready-helpers.js')}}"></script>
+     <script src="{{asset('public/js/mvpready-admin.js')}}"></script>
+
+    <!-- Demo JS -->
+     <script src="{{asset('public/global/js/demos/form-plugins.js')}}"></script>
+
+
     {{--Custom js--}}
     <script src="{{asset('public/js/top-performing-pages.js')}}"></script>
     <script src="{{asset('public/js/dashboard.js')}}"></script>
     <script src="{{asset('public/js/all-init.js')}}"></script>
     <script src="{{asset('public/js/all.js')}}"></script>
+    <script src="{{asset('public/js/tag/jquery-tag.js')}}"></script>
 
 
 </body>

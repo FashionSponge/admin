@@ -14,7 +14,6 @@
             </div> <!-- /.portlet-header -->
               {!! $brands->render() !!}
 
-
             <div class="portlet-body" id="fragment">
               <div class="table-responsive">
               <table class="table table-striped table-bordered thumbnail-table">
