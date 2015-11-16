@@ -141,7 +141,7 @@ class StyleController extends Controller
                 }
 
                 // Resize using image intervention
-                $img = Image::make($desPath)->resize(100, 100);
+                $img = Image::make($desPath)->resize(140, 140);
 
                 $img->save($desPath);
 

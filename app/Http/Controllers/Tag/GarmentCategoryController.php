@@ -107,7 +107,7 @@ class GarmentCategoryController extends Controller
                 }
 
                 // Resize using image intervention
-                $img = Image::make($desPath)->resize(120, 120);
+                $img = Image::make($desPath)->resize(140, 140);
 
                 $img->save($desPath);
             }

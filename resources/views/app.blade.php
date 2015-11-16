@@ -76,15 +76,7 @@
        {{--Read--}}
        {{Session::put('imgSrcUploads' , 'http://dev.fashionsponge.com/fs_folders/images/uploads')}}
    @endif
-
-   {{--{{'session get 1  = ' . Session::get('imgSrcUploadsRead')}} <br>--}}
-   {{--{{'session get 2  = ' . Session::get('imgSrcUploads')}} <br>--}}
-
-
-
-
-
-
+ 
 
 </head>
 <body>

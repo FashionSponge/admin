@@ -32,7 +32,8 @@ class TestingController extends Controller
         $this->insertPrice();
     }
 
-    private function insertColor() {
+    private function insertColor() 
+    {
 
         foreach (TagColor::colors() as $hex => $colorName) {
 
@@ -44,7 +45,6 @@ class TestingController extends Controller
             }
 
         }
-
     }
     private function insertPattern()
     {
@@ -58,7 +58,8 @@ class TestingController extends Controller
             }
         }
     }
-    private function insertMaterial() {
+    private function insertMaterial() 
+    {
         foreach(TagMaterial::material() as $key => $item) {
             if(!TagMaterial::firstOrCreate(['name'=>$item])){
                 echo "material inserted $item <br>";
@@ -67,7 +68,10 @@ class TestingController extends Controller
             }
         }
     }
-    private function insertGarment() {
+    private function insertGarment() 
+    { 
+
+
         foreach(TagGarment::garment() as $category => $subCategories)  {
             //insert garment category
             $categoryDb = TagGarmentCategory::firstOrCreate(['name' => $category]);
@@ -84,20 +88,32 @@ class TestingController extends Controller
                 if(!empty($subCategoryDb->id)) {
                     echo " sub category  exist $subCategory<br> ";
                 }
-
-
-
                 // echo "sub category id " . $subCategoryDb->id . '<br>';
-                foreach($garments as $key => $garment) {
-                    // echo "$garment<br>";
-                    // insert garment
-                    // echo "$category : $subCategory : $garment <br>";
-                    if(!TagGarment::firstOrCreate(['name' => $garment, 'garment_subcategory_id'=>$subCategoryDb->id])){
+                foreach($garments as $garment1 => $genderAndPlusBlogger) {
+
+                    $garment = ''; 
+                    $gender = ''; 
+                    $plus_size = '';  
+
+                    if(is_array($genderAndPlusBlogger)) { 
+                        // echo "garment = $garment1 gender " . $genderAndPlusBlogger['gender'] . ' plus size blogger = ' . $genderAndPlusBlogger['plus_size'] . '<br>';
+                        $garment = $garment1;
+                        $gender =  (!empty($genderAndPlusBlogger['gender'])) ? $genderAndPlusBlogger['gender'] : '';
+                        $plus_size = (!empty($genderAndPlusBlogger['plus_size'])) ? $genderAndPlusBlogger['plus_size'] : '';  
+                    } else { 
+                        $garment = $genderAndPlusBlogger;
+                    } 
+
+                    
+
+                    echo " gender $gender garment $garment plus_size $plus_size <br>";
+
+                     
+                    if(!TagGarment::firstOrCreate(['name' => $garment, 'garment_subcategory_id'=>$subCategoryDb->id, 'gender'=>$gender, 'plus_size'=>$plus_size])){
                         echo "<b>garment inserted $garment </b><br> ";
                     } else {
                         echo "<em>garment exist $garment </em><br> ";
-                    }
-
+                    }    
                 }
             }
         }
@@ -112,7 +128,8 @@ class TestingController extends Controller
             }
         }
     }
-    private function insertStyle(){
+    private function insertStyle()
+    {
         foreach(TagStyle::style() as $key => $item) {
             if(!TagStyle::firstOrCreate(['name'=>$item])) {
                 echo "style added name =>$item <br> ";
@@ -122,7 +139,8 @@ class TestingController extends Controller
             }
         }
     }
-    private function insertSeason(){
+    private function insertSeason()
+    {
         foreach(TagSeason::season() as $key => $item) {
             if(!TagSeason::firstOrCreate(['name'=>$item])) {
                 echo "season added name =>$item <br> ";
@@ -132,7 +150,8 @@ class TestingController extends Controller
             }
         }
     }
-    private function insertOccasion(){
+    private function insertOccasion()
+    {
         foreach(TagOccasion::occasion() as $key => $item) {
             if(!TagOccasion::firstOrCreate(['name'=>$item])) {
                 echo "occasion added name =>$item <br> ";
@@ -142,7 +161,8 @@ class TestingController extends Controller
             }
         }
     }
-    private function insertPrice(){
+    private function insertPrice()
+    {
         foreach(TagPrice::price() as $key => $item) {
             if(!TagPrice::firstOrCreate(['name'=>$item])) {
                 echo "occasion added name =>$item <br> ";
