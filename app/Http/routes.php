@@ -125,7 +125,7 @@ Route::get('ad/header-status/query/{stat?}', [
 //]);
 
 Route::get('brand/{category?}/{gender?}', [
-    'as' => 'route_brand', 'uses' => 'BrandController@index'
+    'as' => 'route_brand', 'uses' => 'Tag\BrandController@index'
 ]);
 
 Route::get('insert', [
@@ -133,11 +133,14 @@ Route::get('insert', [
 ]);
 
 
+Route::resource("tag/brand", 'Tag\BrandController',
+    ['only' => ['store', 'update', 'show']]);
+
 //TAG
 
 
 
-$tagPages = array('material', 'pattern', 'garment', 'url', 'style', 'occasion', 'season', 'price');
+$tagPages = array('material', 'pattern', 'garment', 'url', 'style', 'occasion', 'season', 'price', 'topic');
 $slash    = '\ ';
 
 
@@ -169,6 +172,11 @@ Route::resource('tag/garment-sub-category', 'Tag\GarmentSubCategoryController', 
     'only'=>['index', 'store', 'update', 'show']
 ]);
 
+Route::resource('tag/topic-category', 'Tag\TopicCategoryController', [
+    'only'=>['index', 'store', 'update']
+]);
+
+
 
 
 Route::group(['prefix' => 'tag'], function () {
@@ -176,6 +184,10 @@ Route::group(['prefix' => 'tag'], function () {
         'as' => 'pages.tag.compose', 'uses' => 'PageController@tagCompose'
     ]);
 });
+
+
+
+
 
 
 

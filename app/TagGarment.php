@@ -26,7 +26,7 @@ class TagGarment extends Model
      */
     public function tagGarmentSubCategory()
     {
-        return $this->belongsTo('App\tagGarmentSubCategory', 'garment_subcategory_id');
+        return $this->belongsTo('App\TagGarmentSubCategory', 'garment_subcategory_id');
     }
 
     public static function garment() {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\TagOccasion;
 use App\TagSeason;
 use App\TagStyle;
+use App\TagTopicCategory;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -17,10 +18,13 @@ use App\TagMaterial;
 use App\TagPattern;
 use App\TagPrice;
 use App\TagUrl;
+use App\TagTopic;
 
 class TestingController extends Controller
 {
     public function insert(){
+
+        $this->insertTopic();
         $this->insertColor();
         $this->insertPattern();
         $this->insertMaterial();
@@ -30,6 +34,28 @@ class TestingController extends Controller
         $this->insertSeason();
         $this->insertOccasion();
         $this->insertPrice();
+
+    }
+
+    private function insertTopic() {
+
+             foreach(TagTopic::topic() as $topicCategoryName => $topicArray ) {
+                 echo "$topicCategoryName <br>";
+
+                 $topicCategory = TagTopicCategory::firstOrCreate(['name' => $topicCategoryName]);
+
+                 foreach($topicArray as $key => $topic ) {
+                    echo " $topic ";
+
+                     if(!TagTopic::firstOrCreate(['name'=>$topic, 'topic_category_id'=>$topicCategory->id])){
+                         echo " added name=>$topic,  topic_category_id =>$topicCategory <br> ";
+                     }
+                     else {
+                         echo "exist name=>$topic,  topic_category_id =>$topicCategory <br> ";;
+                     }
+                 }
+                 echo "<br>";
+             }
     }
 
     private function insertColor() 
