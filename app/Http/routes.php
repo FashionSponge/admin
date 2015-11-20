@@ -134,8 +134,17 @@ Route::get('insert', [
 
 
 //TAG
+
+
+
 $tagPages = array('material', 'pattern', 'garment', 'url', 'style', 'occasion', 'season', 'price');
 $slash    = '\ ';
+
+
+Route::get('tag/garment/new/entry', [
+    'as' => 'tag.garment.new.entry', 'uses' => 'Tag\GarmentController@getNewEntry'
+]);
+
 
 
 Route::get('tag/garment/{sub_category?}/{name?}/{plus_size?}', [
@@ -159,3 +168,14 @@ Route::resource('tag/garment-category', 'Tag\GarmentCategoryController', [
 Route::resource('tag/garment-sub-category', 'Tag\GarmentSubCategoryController', [
     'only'=>['index', 'store', 'update', 'show']
 ]);
+
+
+
+Route::group(['prefix' => 'tag'], function () {
+    Route::get('compose/{item?}',[
+        'as' => 'pages.tag.compose', 'uses' => 'PageController@tagCompose'
+    ]);
+});
+
+
+

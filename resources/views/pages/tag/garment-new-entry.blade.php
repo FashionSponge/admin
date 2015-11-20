@@ -1,31 +1,19 @@
 @extends('...app')
 @section('content')
-
-
   <div class="container">
 
-    @include(
-            'include.category-menu',
-                array(
-                    'menu' => array
-                    (
-                        'Categories'=>URL::current(),
-                         'new entry'=>route('tag.garment.new.entry')
-                    )
-            )
-        )
-
-
-
-
-
-    {{Session::put('urlGarmentCategory',URL::full())}}
-
-
-
+      @include(
+              'include.category-menu',
+                  array(
+                      'menu' => array
+                      (
+                          'Back'=>route('tag.garment-category.index'),
+                      )
+              )
+          )
 
     {{--{!! Form::open(array('url' => "'" . Route('tag.material.update') . "'", 'action'=>'POST')) !!}--}}
-     {!! Form::open(array('route' => array('tag.garment-category.update', 2)   , 'method' => 'PUT', 'enctype'=>'multipart/form-data')) !!}
+     {!! Form::open(array('route' => array('tag.garment.update', 2)   , 'method' => 'PUT', 'enctype'=>'multipart/form-data')) !!}
        {{--<form method="POST" action="http://localhost/fs/admin/tag/material/2" enctype="multipart/form-data">--}}
            {{--<input name="_method" type="hidden" value="PUT">--}}
            {{--<input name="_token" type="hidden" value="TTipgx83kR18pYmDrEmIeHn6ISMSOJQClc1CSxbT">--}}
@@ -45,10 +33,13 @@
             <thead>
               <tr>
                   <th style="width: 150px">Image</th>
+                  <th>Sub Category</th>
                   <th>Name</th>
+                  <th>gender</th>
+                  <th>plus size</th>
                   <th>Total Post Using</th>
                   <th>Total People Using</th>
-                  <th>Sub Categories</th>
+                  <th>Garment Item</th>
                   <th>Select Image</th>
                   <th>Date Created</th>
                   <th class="text-center">Edit / Delete</th>
@@ -61,22 +52,55 @@
                     <td>
                       <div class="thumbnail">
                         <div class="thumbnail-view">
-                          <a class="thumbnail-view-hover ui-lightbox" href="{{Session::get('imgSrcUploads') . '/garment_category/' . $page->id . '.jpg'}}">
+                          <a class="thumbnail-view-hover ui-lightbox" href="{{Session::get('imgSrcUploads') . '/garment/' . $page->id . '.jpg'}}">
                             <i class="fa fa-plus" ></i>
                           </a>
-                          <img src="{{Session::get('imgSrcUploads') . '/garment_category/' . $page->id . '.jpg' }}" width="125" alt="Gallery Image" />
+                          <img src="{{Session::get('imgSrcUploads') . '/garment/' . $page->id . '.jpg' }}" width="125" alt="Gallery Image" />
                         </div>
                         {{--http://localhost/fs/admin/public/img/material/50.jpg--}}
                         {{--http://localhost/fs/admin/public/img/material/58.jpg--}}
                       </div> <!-- /.thumbnail -->
+                    </td>
+                    <td>
+                        <select  name="subCategoryIds[{{$page->id}}]" >
+                            <option value="">Select Sub Category</option>
+                            @foreach($subCategory as $key => $value)
+                                <option value="{{$value->id}}" >{{$value->name}}</option>
+                            @endforeach
+                        </select>
+
                     </td>
                     <td class="valign-middle">
                     <a href="javascript:;" title="">{{$page->name}}</a>
                         <div class="input-group" id="admin-tag-field-name-{{$page->id}}" style="display:none" >
                           <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" value="{{$page->name}}" name="tagItemName[{{$page->id}}]">
                         </div>
-
                     </td>
+                     <td class="valign-middle">
+                        <a href="javascript:;" title="">{{$page->gender}}</a>
+                        <div class="input-group" id="admin-tag-field-gender-{{$page->id}}" style="display:none" >
+
+                            <select class="form-control" id="basic-url" aria-describedby="basic-addon3" value="{{$page->gender}}" name="tagItemGender[{{$page->id}}]">
+                                 <option value="">Select Gender..</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="both">Both</option>
+                            </select>
+                        </div>
+                    </td>
+
+                   <td class="valign-middle">
+                        <a href="javascript:;" title="">{{$page->plus_size}}</a>
+                        <div class="input-group" id="admin-tag-field-plus-size-{{$page->id}}" style="display:none" >
+                             <select  class="form-control" id="basic-url" aria-describedby="basic-addon3" value="{{$page->plus_size}}" name="tagItemPlusSize[{{$page->id}}]">
+                                 <option value="">Select Plus Size..</option>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                                <option value="both">Both</option>
+                            </select>
+                        </div>
+                    </td>
+
                     <td class="valign-middle">
                         <a href="javascript:;" title=""> {{rand(0,1000)}} </a>
                     </td>
@@ -85,7 +109,7 @@
                     </td>
 
                       <td class="file-info valign-middle">
-                           <a href="{{route('tag.garment-sub-category.show', $page->name)}}" title="">View ({{rand(0,20)}})</a>
+                           <a href="{{route('tag.garment.show', $page->name)}}" title="">View ({{rand(0,20)}})</a>
                         </td>
 
 
@@ -105,7 +129,7 @@
                     </td>
 
                     <td class="text-center valign-middle">
-                      <span class="btn btn-xs btn-info" id="admin-tag-edit-content" onclick="admin_tag_edit_item_open('#admin-tag-field-name-{{$page->id}}')"  ><i class="fa fa-pencil"></i></span>
+                      <span class="btn btn-xs btn-info" id="admin-tag-edit-content"  onclick="admin_tag_edit_item_open('#admin-tag-field-name-{{$page->id}}, #admin-tag-field-gender-{{$page->id}} , #admin-tag-field-plus-size-{{$page->id}}')" ><i class="fa fa-pencil"></i></span>
                       &nbsp;
                       <span class="btn btn-xs btn-primary" onclick="admin_tag_delete_item('#garment-item-container-{{$page->id}}', '{{$page->id}}', 'material')" ><i class="fa fa-times"></i></span>
                     </td>

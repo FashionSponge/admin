@@ -308,7 +308,7 @@
             <li><a href="{{Route('tag.style.index') . '/all/all'}}">Style</a></li>
             <li><a href="{{Route('tag.occasion.index') . '/all/all'}}">Occasion</a></li>
             <li><a href="{{Route('tag.season.index') . '/all/all'}}">Season</a></li>
-
+            <li><a href="{{Route('pages.tag.compose')}}">Compose</a></li>
           </ul>
         </li>
       </ul>

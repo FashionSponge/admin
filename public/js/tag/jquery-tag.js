@@ -22,5 +22,15 @@ function admin_tag_delete_item(selector, id, type) {
     } else {
         //alert('deteling item from ' + type + ' aborted');
     }
+}
 
+
+
+
+function compose_tag_generate_field() {
+    //count how many field are existing
+    //send total field and type = 'material, brand and etc..'
+    //For FFox
+        var countTD=$("td").length/2;
+        alert(countTD);
 }

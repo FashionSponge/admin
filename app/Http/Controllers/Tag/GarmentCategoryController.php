@@ -126,4 +126,9 @@ class GarmentCategoryController extends Controller
     {
         //
     }
+
+    //
+    public function getSubCategory($id) {
+        return '<option> value </option>';
+    }
 }

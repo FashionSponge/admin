@@ -60,12 +60,12 @@ class GarmentController extends Controller
 
         echo "coolr $subCategory <br>";
 
-//        $pagination = TagGarment::where('garment_subcategory_id', $id)->orderBy('id', 'desc')->paginate(5);
-//
-//        $pagination->setPath($subCategory);
-//
-//        return view('pages.tag.garment', ['pagination' => $pagination, 'subCategory' => $subCategory]);
-//
+        //        $pagination = TagGarment::where('garment_subcategory_id', $id)->orderBy('id', 'desc')->paginate(5);
+        //
+        //        $pagination->setPath($subCategory);
+        //
+        //        return view('pages.tag.garment', ['pagination' => $pagination, 'subCategory' => $subCategory]);
+        //
         if($gender == 'all' && $plusSize == 'all') {
             $pagination = TagGarment::where('garment_subcategory_id', $id)->orderBy('id', 'desc')->paginate(15);
         } else {
@@ -97,6 +97,18 @@ class GarmentController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+
+         //update item name
+        foreach($request->get('subCategoryIds') as $id => $garmentSubcategoryId):
+            if(!empty($garmentSubcategoryId)){
+                $response = TagGarment::find($id);
+                $response->garment_subcategory_id = $garmentSubcategoryId;
+                $response->save();
+            }
+        endforeach;
+
+
         //update item name
         foreach($request->get('tagItemName') as $id => $name):
             if(!empty($name)){
@@ -175,4 +187,19 @@ class GarmentController extends Controller
     {
         //
     }
+
+    public function getNewEntry()
+    {
+        $pagination = TagGarment::where('garment_subcategory_id', 0)->orderBy('id', 'desc')->paginate(15);
+
+        $subCategory = $subCategory = TagGarmentSubCategory::orderBy('id', 'desc')->get();
+
+        return view('pages.tag.garment-new-entry', ['pagination' => $pagination, 'subCategory'=>$subCategory]);
+    }
+
+    public function saveNewEntry()
+    {
+        //
+    }
+
 }
