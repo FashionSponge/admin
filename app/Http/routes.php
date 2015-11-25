@@ -140,7 +140,7 @@ Route::resource("tag/brand", 'Tag\BrandController',
 
 
 
-$tagPages = array('material', 'pattern', 'garment', 'url', 'style', 'occasion', 'season', 'price', 'topic');
+$tagPages = array('material', 'pattern', 'garment', 'url', 'style', 'occasion', 'season', 'price', 'topic', 'tag');
 $slash    = '\ ';
 
 

@@ -310,6 +310,7 @@
             <li><a href="{{Route('tag.season.index') . '/all/all'}}">Season</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{{Route('tag.topic-category.index')}}">Topic</a></li>
+            <li><a href="{{Route('tag.tag.index')}}">Tag</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{{Route('pages.tag.compose')}}">Compose</a></li>
 
