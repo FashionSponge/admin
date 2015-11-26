@@ -5,10 +5,14 @@ use App\BrandCategory;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
 use App\Brand;
 use Input;
 use Image;
 use Session;
+use Files;
+use File;
+
 class BrandController extends Controller
 {
 
@@ -170,15 +174,8 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $destinationPath = Session::get('imgSrcUploadsRead') . '/brands/' . $id . '_brand.jpg';
+        File::delete($destinationPath);
+        return Brand::destroy($id);
     }
-
-
-
-
-
-
-
-
-
 }

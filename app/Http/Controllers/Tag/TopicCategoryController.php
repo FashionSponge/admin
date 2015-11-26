@@ -12,6 +12,8 @@ use App\Http\Controllers\Controller;
 use Input;
 use Image;
 use Session;
+use Files;
+use File;
 
 class TopicCategoryController extends Controller
 {
@@ -128,6 +130,23 @@ class TopicCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $topicCategories = TagTopicCategory::find($id);
+
+        //Querying Relations
+        foreach ($topicCategories->tagTopic as $topic) {
+            //delete topic image from folder
+            $destinationPath = Session::get('imgSrcUploadsRead') . '/topic/' . $topic->id . '.jpg';
+            File::delete($destinationPath);
+
+            //delete topic from the database
+            TagTopic::destroy($topic->id);
+        }
+
+        //delete category image
+        $destinationPath = Session::get('imgSrcUploadsRead') . '/topic_category/' . $topicCategories->id . '.jpg';
+        File::delete($destinationPath);
+
+        //delete category from database
+        return TagTopicCategory::destroy($id);
     }
 }

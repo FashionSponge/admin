@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use Input;
 use Image;
 use Session;
+use Files;
+use File;
 
 class TopicController extends Controller
 {
@@ -153,11 +155,14 @@ class TopicController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $destinationPath = Session::get('imgSrcUploadsRead') . '/topic/' . $id . '.jpg';
+        File::delete($destinationPath);
+        return TagTopic::destroy($id);
     }
+
 }

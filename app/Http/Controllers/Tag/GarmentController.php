@@ -12,6 +12,8 @@ use App\Http\Controllers\Controller;
 use Input;
 use Session;
 Use Image;
+use Files;
+use File;
 
 
 class GarmentController extends Controller
@@ -185,7 +187,9 @@ class GarmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $destinationPath = Session::get('imgSrcUploadsRead') . '/garment/' . $id . '.jpg';
+        File::delete($destinationPath);
+        return TagGarment::destroy($id);
     }
 
     public function getNewEntry()
@@ -195,11 +199,6 @@ class GarmentController extends Controller
         $subCategory = $subCategory = TagGarmentSubCategory::orderBy('id', 'desc')->get();
 
         return view('pages.tag.garment-new-entry', ['pagination' => $pagination, 'subCategory'=>$subCategory]);
-    }
-
-    public function saveNewEntry()
-    {
-        //
     }
 
 }

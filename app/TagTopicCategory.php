@@ -17,8 +17,6 @@ class TagTopicCategory extends Model
      */
     public function tagTopic()
     {
-        return $this->hasMany('App\TogTopic');
+        return $this->hasMany('App\TagTopic', 'topic_category_id', 'id');
     }
-
-
 }

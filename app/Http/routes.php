@@ -134,7 +134,7 @@ Route::get('insert', [
 
 
 Route::resource("tag/brand", 'Tag\BrandController',
-    ['only' => ['store', 'update', 'show']]);
+    ['only' => ['store', 'update', 'show', 'destroy']]);
 
 //TAG
 
@@ -161,19 +161,19 @@ foreach($tagPages as $key => $page):
     ]);
 
     Route::resource("tag/$page", 'Tag'. str_replace(' ', '', $slash) . ucfirst($page) . 'Controller',
-        ['only' => ['store', 'update', 'show']]);
+        ['only' => ['store', 'update', 'show', 'destroy']]);
 endforeach;
 
 Route::resource('tag/garment-category', 'Tag\GarmentCategoryController', [
-    'only'=>['index', 'store', 'update']
+    'only'=>['index', 'store', 'update', 'destroy']
 ]);
 
 Route::resource('tag/garment-sub-category', 'Tag\GarmentSubCategoryController', [
-    'only'=>['index', 'store', 'update', 'show']
+    'only'=>['index', 'store', 'update', 'show', 'destroy']
 ]);
 
 Route::resource('tag/topic-category', 'Tag\TopicCategoryController', [
-    'only'=>['index', 'store', 'update']
+    'only'=>['index', 'store', 'update', 'destroy']
 ]);
 
 

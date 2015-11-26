@@ -13,6 +13,9 @@ use App\TagGarmentCategory;
 use Input;
 use Session;
 use Image;
+use Files;
+use File;
+
 
 
 class GarmentSubCategoryController extends Controller
@@ -181,6 +184,23 @@ class GarmentSubCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $topicCategories = TagGarmentSubCategory::find($id);
+
+        //Querying Relations
+        foreach ($topicCategories->tagGarment as $topic) {
+            //delete topic image from folder
+            $destinationPath = Session::get('imgSrcUploadsRead') . '/garment/' . $topic->id . '.jpg';
+            File::delete($destinationPath);
+
+            //delete topic from the database
+            TagGarment::destroy($topic->id);
+        }
+
+        //delete category image
+        $destinationPath = Session::get('imgSrcUploadsRead') . '/garment_sub_category/' . $topicCategories->id . '.jpg';
+        File::delete($destinationPath);
+
+        //delete category from database
+        return TagGarmentSubCategory::destroy($id);
     }
 }

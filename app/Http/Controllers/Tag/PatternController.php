@@ -11,6 +11,8 @@ use App\Http\Controllers\Controller;
 use Input;
 use Session;
 use Image;
+use Files;
+use File;
 
 class PatternController extends Controller
 {
@@ -152,14 +154,17 @@ class PatternController extends Controller
         return redirect()->back();
     }
 
+
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $destinationPath = Session::get('imgSrcUploadsRead') . '/pattern/' . $id . '.jpg';
+        File::delete($destinationPath);
+        return TagPattern::destroy($id);
     }
 }

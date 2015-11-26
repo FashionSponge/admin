@@ -161,6 +161,8 @@ class MaterialController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $destinationPath = Session::get('imgSrcUploadsRead') . '/material/' . $id . '.jpg';
+        File::delete($destinationPath);
+        return TagMaterial::destroy($id);
     }
 }

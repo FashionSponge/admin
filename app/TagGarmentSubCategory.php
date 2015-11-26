@@ -35,7 +35,7 @@ class TagGarmentSubCategory extends Model
      */
     public function tagGarment()
     {
-        return $this->hasMany('App\TagGarment');
+        return $this->hasMany('App\TagGarment', 'garment_subcategory_id', 'id');
     }
 
 

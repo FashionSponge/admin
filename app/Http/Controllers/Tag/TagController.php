@@ -11,6 +11,9 @@ use App\Tag;
 use Input;
 use Image;
 use Session;
+use Files;
+use File;
+
 
 class TagController extends Controller
 {
@@ -139,6 +142,8 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $destinationPath = Session::get('imgSrcUploadsRead') . '/tag/' . $id . '.jpg';
+        File::delete($destinationPath);
+        return Tag::destroy($id);
     }
 }

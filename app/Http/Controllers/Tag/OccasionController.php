@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use Input;
 use Session;
 use Image;
+use Files;
+use File;
 
 class OccasionController extends Controller
 {
@@ -158,6 +160,8 @@ class OccasionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $destinationPath = Session::get('imgSrcUploadsRead') . '/occasion/' . $id . '.jpg';
+        File::delete($destinationPath);
+        return TagOccasion::destroy($id);
     }
 }

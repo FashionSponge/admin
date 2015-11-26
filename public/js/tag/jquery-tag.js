@@ -11,7 +11,9 @@ function admin_tag_edit_item_open(selector) {
  * @param id = id of the item
  * @param type = pattern, material, garment, price and etc...
  */
-function admin_tag_delete_item(selector, id, type) {
+function admin_tag_delete_item(selector, id, type, url) {
+
+
 
     if(confirm('Are you sure to delete this ' + type + '?')) {
         //alert('process delete ' + type);
@@ -19,6 +21,21 @@ function admin_tag_delete_item(selector, id, type) {
         //alert(selector);
         $(selector).slideUp('fast');
         //send request to post query
+
+        //alert(url + ' token = '  +  "{{ csrf_token() }}")
+
+        $.ajax({
+            url: url,
+            type: "delete",
+            data: {'email':'me@gmail.com', '_token': $('input[name=_token]').val()},
+            success: function(data){
+                if(data == true) {
+                    alert('successfully deleted');
+                } else {
+                   alert('failed to deleted');
+                }
+            }
+        });
     } else {
         //alert('deteling item from ' + type + ' aborted');
     }

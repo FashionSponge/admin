@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use Input;
 use Session;
 use Image;
+use Files;
+use File;
 
 
 class SeasonController extends Controller
@@ -159,6 +161,8 @@ class SeasonController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $destinationPath = Session::get('imgSrcUploadsRead') . '/season/' . $id . '.jpg';
+        File::delete($destinationPath);
+        return TagSeason::destroy($id);
     }
 }

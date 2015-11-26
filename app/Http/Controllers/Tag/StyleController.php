@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use Input;
 use Session;
 use Image;
+use Files;
+use File;
 
 class StyleController extends Controller
 {
@@ -159,6 +161,8 @@ class StyleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $destinationPath = Session::get('imgSrcUploadsRead') . '/style/' . $id . '.jpg';
+        File::delete($destinationPath);
+        return TagStyle::destroy($id);
     }
 }

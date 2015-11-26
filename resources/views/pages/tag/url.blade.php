@@ -75,7 +75,7 @@
                     <td class="text-center valign-middle">
                       <span class="btn btn-xs btn-info" id="admin-tag-edit-content" onclick="admin_tag_edit_item_open('#admin-tag-field-name-{{$page->id}}')"  ><i class="fa fa-pencil"></i></span>
                       &nbsp;
-                      <span class="btn btn-xs btn-primary" onclick="admin_tag_delete_item('#garment-item-container-{{$page->id}}', '{{$page->id}}', 'material')" ><i class="fa fa-times"></i></span>
+                      <span class="btn btn-xs btn-primary" onclick="admin_tag_delete_item('#garment-item-container-{{$page->id}}', '{{$page->id}}', 'url', '{{route('tag.url.destroy', $page->id)}}')" ><i class="fa fa-times"></i></span>
                     </td>
                   </tr>
 

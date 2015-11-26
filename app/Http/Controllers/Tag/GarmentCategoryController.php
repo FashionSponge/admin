@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers\Tag;
 
+use App\TagGarment;
 use App\TagGarmentCategory;
+use App\TagGarmentSubCategory;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Input;
 use Session;
 use Image;
+use Files;
+use File;
+
+use  App\Http\Controllers\Tag;
 
 class GarmentCategoryController extends Controller
 {
@@ -124,7 +130,23 @@ class GarmentCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $garmentSubCategoryController = new Tag\GarmentSubCategoryController();
+        $garmentController = new Tag\GarmentController();
+        $tagGarmentCategories = TagGarmentCategory::find($id);
+
+        //Querying Relations
+        foreach ($tagGarmentCategories->tagGarmentSubCategory as $topic) {
+            if($garmentSubCategoryController->destroy($topic->id)){
+//                echo "sub category deleted id "  . $topic->id . " <br>";
+            }
+        }
+
+        //delete category image
+        $destinationPath = Session::get('imgSrcUploadsRead') . '/garment_category/' . $tagGarmentCategories->id . '.jpg';
+        File::delete($destinationPath);
+
+        //delete category from database
+        return TagGarmentCategory::destroy($tagGarmentCategories->id);
     }
 
     //
